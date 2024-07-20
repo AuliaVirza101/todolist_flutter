@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist_flutter/utils/todo_list.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -13,39 +14,21 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Color.fromARGB(255, 107, 106, 106),
       appBar: AppBar(
-        title: const Text('To do List'),
-        backgroundColor: Colors.black,
+        title: const Center(
+          child: Text('To do List'),
+        ),
+        backgroundColor: Color.fromARGB(255, 12, 12, 12),
         foregroundColor: Colors.white,
       ),
       body: ListView.builder(
-        itemCount: toDoList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.only(
-              top: 20,
-              left: 20,
-              right: 20,
-              bottom: 0,
-            ),
-            child: Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Text(
-                toDoList[index][0],
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          );
-        },
-      ),
+          itemCount: toDoList.length,
+          itemBuilder: (BuildContext context, index) {
+            return TodoList(
+              taskName: toDoList[index][0],
+            );
+          }),
     );
   }
 }
