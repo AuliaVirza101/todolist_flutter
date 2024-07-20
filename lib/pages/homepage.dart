@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todolist_flutter/utils/todo_list.dart';
 
+// HomePage is the main widget for the home screen of the To Do List application.
 class HomePage extends StatefulWidget {
   HomePage({super.key});
 
@@ -15,13 +16,18 @@ class _HomePageState extends State<HomePage> {
     ['Walk the dog', false],
     ['Read a book', false],
   ];
+
+  // Controller to manage the text input for new tasks.
   final _controller = TextEditingController();
+
+   // Method to toggle the completion status of a task.
   void checkBoxChanged(int index) {
     setState(() {
       toDoList[index][1] = !toDoList[index][1];
     });
   }
 
+// Method to add a new task to the list.
   void saveNewTask() {
     setState(() {
       toDoList.add([_controller.text, false]);
@@ -29,6 +35,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+// Method to delete a task from the list based on its index.
    void deleteTask(int index) {
     setState(() {
       toDoList.removeAt(index);
@@ -38,22 +45,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 107, 106, 106),
+      backgroundColor: Color.fromARGB(255, 107, 106, 106),// Background color of the home screen.
       appBar: AppBar(
         title: const Center(
-          child: Text('To do List'),
+          child: Text('To do List'),// Title of the app bar.
         ),
-        backgroundColor: Color.fromARGB(255, 12, 12, 12),
-        foregroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 12, 12, 12),// App bar background color.
+        foregroundColor: Colors.white,// App bar text color.
       ),
       body: ListView.builder(
-          itemCount: toDoList.length,
+          itemCount: toDoList.length,// Number of items in the toDoList.
           itemBuilder: (BuildContext context, index) {
             return TodoList(
-              taskName: toDoList[index][0],
-              taskCompleted: toDoList[index][1],
-              onChanged: (value) => checkBoxChanged(index),
-              deleteFunction: (contex) =>deleteTask(index),
+              taskName: toDoList[index][0], // Task name.
+              taskCompleted: toDoList[index][1],// Task completion status.
+              onChanged: (value) => checkBoxChanged(index),// Callback for checkbox state changes.
+              deleteFunction: (contex) =>deleteTask(index),// Callback for deleting a task.
             );
           }),
       floatingActionButton: Padding(
